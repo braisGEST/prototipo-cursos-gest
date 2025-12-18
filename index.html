@@ -25,103 +25,23 @@
 
   <div class="container">
 
-    <article class="card" data-tags="curso realtime" style="grid-column:1 / -1; max-width:900px; margin:0 auto 72px auto;">
-        <div class="card-image" style="height:260px; background-image:url('https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=1400&q=80');">
-          <span class="tag">Destacado</span>
+    <!-- Carrusel de Destacados (se renderizará dinámicamente desde JSON) -->
+    <section class="featured-carousel">
+      <div class="carousel-container">
+        <button type="button" class="carousel-btn carousel-prev" aria-label="Anterior">‹</button>
+        <div class="carousel-track">
+          <!-- Los slides se generarán dinámicamente -->
         </div>
-        <div class="card-content">
-          <h3 style="font-size:1.4rem;">Programa Intensivo · Producción Realtime</h3>
-          <p>Formación central del año orientada a perfiles técnicos y creativos que buscan dominar flujos profesionales en Unreal Engine, VFX y sistemas en tiempo real.</p>
-          <div class="date"><span>Inicio: 1 Feb 2026</span><span>Fin: 31 May 2026</span></div>
-        </div>
-      </article>
+        <button type="button" class="carousel-btn carousel-next" aria-label="Siguiente">›</button>
+      </div>
+      <div class="carousel-indicators">
+        <!-- Los indicadores se generarán dinámicamente -->
+      </div>
+    </section>
 
-      <section class="grid">
-      <article class="card" data-tags="curso realtime">
-        <div class="card-image" style="background-image:url('https://images.unsplash.com/photo-1605379399642-870262d3d051?auto=format&fit=crop&w=1200&q=80');">
-          <span class="tag">Curso</span>
-        </div>
-        <div class="card-content">
-          <h3>Unreal Engine 5 · Realtime Cinematics</h3>
-          <p>Pipeline profesional para cinemáticas en tiempo real: iluminación, cámaras, Lumen y optimización.</p>
-          <div class="date">
-            <span>Inicio: 12 Mar 2026</span>
-            <span>Fin: 30 Abr 2026</span>
-          </div>
-        </div>
-      </article>
-
-      <article class="card" data-tags="evento ia">
-        <div class="card-image" style="background-image:url('https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1200&q=80');">
-          <span class="tag">Evento</span>
-        </div>
-        <div class="card-content">
-          <h3>IA aplicada a Producción Audiovisual</h3>
-          <p>Casos reales de uso de IA en preproducción, edición, automatización y flujos creativos.</p>
-          <div class="date">
-            <span>Inicio: 22 Feb 2026</span>
-            <span>Fin: 22 Feb 2026</span>
-          </div>
-        </div>
-      </article>
-
-      <article class="card" data-tags="workshop realtime">
-        <div class="card-image" style="background-image:url('https://images.unsplash.com/photo-1618477247222-acbdb0e159b3?auto=format&fit=crop&w=1200&q=80');">
-          <span class="tag">Workshop</span>
-        </div>
-        <div class="card-content">
-          <h3>Houdini · FX para Realtime</h3>
-          <p>Creación de efectos procedurales optimizados para motores en tiempo real.</p>
-          <div class="date">
-            <span>Inicio: 5 Abr 2026</span>
-            <span>Fin: 7 Abr 2026</span>
-          </div>
-        </div>
-      </article>
-    <article class="card" data-tags="curso ia">
-        <div class="card-image" style="background-image:url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80');"></div>
-        <div class="card-content"><h3>IA para Automatización Creativa</h3><p>Uso práctico de IA en tareas creativas, scripting y producción audiovisual.</p><div class="date"><span>10 Mar 2026</span><span>10 Abr 2026</span></div></div>
-      </article>
-
-      <article class="card" data-tags="evento realtime">
-        <div class="card-image" style="background-image:url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80');"></div>
-        <div class="card-content"><h3>Realtime Tech Meetup</h3><p>Encuentro técnico sobre flujos realtime, demos y casos reales.</p><div class="date"><span>5 May 2026</span><span>5 May 2026</span></div></div>
-      </article>
-
-      <article class="card" data-tags="workshop realtime">
-        <div class="card-image" style="background-image:url('https://images.unsplash.com/photo-1618477247222-acbdb0e159b3?auto=format&fit=crop&w=1200&q=80');"></div>
-        <div class="card-content"><h3>Workshop Houdini FX</h3><p>Introducción práctica a FX procedurales aplicados a tiempo real.</p><div class="date"><span>18 Jun 2026</span><span>20 Jun 2026</span></div></div>
-      </article>
-
-      <article class="card" data-tags="curso realtime">
-        <div class="card-image" style="background-image:url('https://images.unsplash.com/photo-1593508512255-86ab42a8e620?auto=format&fit=crop&w=1200&q=80');"></div>
-        <div class="card-content"><h3>Blueprint Avanzado en Unreal Engine</h3><p>Optimización y buenas prácticas para sistemas complejos con visual scripting en UE5.</p><div class="date"><span>15 Abr 2026</span><span>30 May 2026</span></div></div>
-      </article>
-
-      <article class="card" data-tags="evento ia">
-        <div class="card-image" style="background-image:url('https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80');"></div>
-        <div class="card-content"><h3>Generative AI Summit</h3><p>Conferencia sobre modelos generativos aplicados a contenido audiovisual y gaming.</p><div class="date"><span>8 Jun 2026</span><span>8 Jun 2026</span></div></div>
-      </article>
-
-      <article class="card" data-tags="workshop">
-        <div class="card-image" style="background-image:url('https://images.unsplash.com/photo-1551033406-611cf9a28f67?auto=format&fit=crop&w=1200&q=80');"></div>
-        <div class="card-content"><h3>Motion Capture para Realtime</h3><p>Captura de movimiento y su integración en pipelines de producción en tiempo real.</p><div class="date"><span>25 Jul 2026</span><span>27 Jul 2026</span></div></div>
-      </article>
-
-      <article class="card" data-tags="curso">
-        <div class="card-image" style="background-image:url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80');"></div>
-        <div class="card-content"><h3>Lighting Artist Masterclass</h3><p>Curso especializado en iluminación para producción virtual y entornos 3D realistas.</p><div class="date"><span>1 Sep 2026</span><span>30 Oct 2026</span></div></div>
-      </article>
-
-      <article class="card" data-tags="evento realtime">
-        <div class="card-image" style="background-image:url('https://images.unsplash.com/photo-1591453089816-0fbb971b454c?auto=format&fit=crop&w=1200&q=80');"></div>
-        <div class="card-content"><h3>Virtual Production Forum</h3><p>Mesa redonda con profesionales sobre el futuro de la producción virtual en España.</p><div class="date"><span>12 Oct 2026</span><span>12 Oct 2026</span></div></div>
-      </article>
-
-      <article class="card" data-tags="workshop ia">
-        <div class="card-image" style="background-image:url('https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1200&q=80');"></div>
-        <div class="card-content"><h3>Stable Diffusion para Concept Art</h3><p>Uso de modelos de difusión para acelerar procesos de preproducción artística.</p><div class="date"><span>20 Nov 2026</span><span>22 Nov 2026</span></div></div>
-      </article>
+    <!-- Grid de Artículos (se renderizará dinámicamente desde JSON) -->
+    <section class="grid">
+      <!-- Los artículos se generarán dinámicamente desde el JSON -->
     </section>
 
     <footer>
@@ -134,6 +54,54 @@
         <span style="color:var(--muted); font-size:0.75rem;">© 2026 · gest-cursos</span>
       </div>
     </footer>
+  </div>
+
+  <!-- Modal de Artículo -->
+  <div id="article-modal" class="modal">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+      <button type="button" class="modal-close" aria-label="Cerrar">×</button>
+
+      <div class="modal-header">
+        <div class="modal-image"></div>
+        <span class="modal-tag"></span>
+      </div>
+
+      <div class="modal-body">
+        <h2></h2>
+        <p class="modal-description"></p>
+
+        <div class="modal-info-grid">
+          <div class="info-item">
+            <span class="info-label">Precio</span>
+            <span class="info-value" id="modal-precio"></span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Duración</span>
+            <span class="info-value" id="modal-duracion"></span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Horario</span>
+            <span class="info-value" id="modal-horario"></span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Instructor</span>
+            <span class="info-value" id="modal-instructor"></span>
+          </div>
+        </div>
+
+        <div class="modal-dates">
+          <span id="modal-fecha-inicio"></span>
+          <span id="modal-fecha-fin"></span>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-primary">Inscribirse</button>
+        <button type="button" class="btn-secondary">Más información</button>
+        <button type="button" class="btn-secondary">Compartir</button>
+      </div>
+    </div>
   </div>
 
   <script src="script.js"></script>
