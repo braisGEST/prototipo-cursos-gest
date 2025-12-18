@@ -7,13 +7,12 @@
   --muted: #9aa0aa;
   --accent: #6d8cff;
   --accent-2: #f2c738;
-  --color-curso: #6d8cff;
-  --color-evento: #f2c738;
-  --color-workshop: #ff6b9d;
+  --color-formacion: #6d8cff;
+  --color-demo: #f2c738;
   --color-realtime: #38f2af;
-  --color-ia: #c77dff;
+  --color-produccion-audiovisual: #c77dff;
   --color-arquitectura: #ff8c42;
-  --color-automovilismo: #ff4757;
+  --color-automocion: #ff4757;
 
   /* Nuevas variables para glassmorphism y efectos */
   --glass-bg: rgba(21, 25, 34, 0.7);
@@ -86,11 +85,70 @@ header h1 {
   line-height: 1.2;
 }
 
-header h1 span {
-  font-size: 0.6em;
+/* ===== LOGO ===== */
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+}
+
+.logo-image {
+  max-height: 50px;
+  width: auto;
+  object-fit: contain;
+}
+
+.powered-by {
+  font-size: 0.7rem;
   color: var(--muted);
   font-weight: 400;
   letter-spacing: 0.02em;
+  align-self:flex-end;
+}
+
+/* ===== BOTÓN CALENDARIO FLOTANTE ===== */
+.btn-calendar-float {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  border: none;
+  color: white;
+  font-size: 1.3rem;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(109,140,255,0.4), 0 4px 12px rgba(0,0,0,0.3);
+  transition: all 0.3s var(--transition-smooth);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-calendar-float:hover {
+  transform: translateY(-4px) scale(1.1);
+  box-shadow: 0 12px 32px rgba(109,140,255,0.6), 0 8px 16px rgba(0,0,0,0.4);
+}
+
+.btn-calendar-float:active {
+  transform: translateY(-2px) scale(1.05);
+}
+
+/* Botón "Todos" */
+.tag-all {
+  background: rgba(255,255,255,0.1);
+  border-color: var(--muted);
+  color: var(--muted);
+}
+
+.tag-all.active {
+  background: rgba(255,255,255,0.2);
+  border-color: var(--text);
+  color: var(--text);
+  box-shadow: 0 0 20px rgba(255,255,255,0.2);
 }
 
 /* ===== NAVEGACIÓN DE FILTROS ===== */
@@ -160,27 +218,6 @@ header h1 span {
 }
 
 /* Colores para los tags en el header */
-.tag[data-filter="curso"].active {
-  background: rgba(109,140,255,0.2);
-  border-color: var(--color-curso);
-  color: var(--color-curso);
-  box-shadow: 0 0 20px rgba(109,140,255,0.3);
-}
-
-.tag[data-filter="evento"].active {
-  background: rgba(242,199,56,0.2);
-  border-color: var(--color-evento);
-  color: var(--color-evento);
-  box-shadow: 0 0 20px rgba(242,199,56,0.3);
-}
-
-.tag[data-filter="workshop"].active {
-  background: rgba(255,107,157,0.2);
-  border-color: var(--color-workshop);
-  color: var(--color-workshop);
-  box-shadow: 0 0 20px rgba(255,107,157,0.3);
-}
-
 .tag[data-filter="realtime"].active {
   background: rgba(56,242,175,0.2);
   border-color: var(--color-realtime);
@@ -188,10 +225,10 @@ header h1 span {
   box-shadow: 0 0 20px rgba(56,242,175,0.3);
 }
 
-.tag[data-filter="ia"].active {
+.tag[data-filter="produccion-audiovisual"].active {
   background: rgba(199,125,255,0.2);
-  border-color: var(--color-ia);
-  color: var(--color-ia);
+  border-color: var(--color-produccion-audiovisual);
+  color: var(--color-produccion-audiovisual);
   box-shadow: 0 0 20px rgba(199,125,255,0.3);
 }
 
@@ -202,10 +239,10 @@ header h1 span {
   box-shadow: 0 0 20px rgba(255,140,66,0.3);
 }
 
-.tag[data-filter="automovilismo"].active {
+.tag[data-filter="automocion"].active {
   background: rgba(255,71,87,0.2);
-  border-color: var(--color-automovilismo);
-  color: var(--color-automovilismo);
+  border-color: var(--color-automocion);
+  color: var(--color-automocion);
   box-shadow: 0 0 20px rgba(255,71,87,0.3);
 }
 
@@ -407,104 +444,72 @@ header h1 span {
   box-shadow: 0 20px 40px rgba(0,0,0,0.4);
 }
 
-/* Sistema de sombras dual: izquierda = tipo evento, derecha = especialidad */
+/* Sistema de sombras dual: sombras de colores según especialidades */
 
-/* CURSO + especialidades */
-.card[data-tags*="curso"][data-tags*="realtime"] {
+/* FORMACION + especialidades */
+.card[data-tags*="formacion"][data-tags*="realtime"] {
   box-shadow: -12px 8px 24px rgba(109,140,255,0.15), 12px 8px 24px rgba(56,242,175,0.12), 0 2px 8px rgba(0,0,0,0.1);
 }
-.card[data-tags*="curso"][data-tags*="realtime"]:hover {
+.card[data-tags*="formacion"][data-tags*="realtime"]:hover {
   box-shadow: -20px 20px 48px rgba(109,140,255,0.35), 20px 20px 48px rgba(56,242,175,0.3);
 }
 
-.card[data-tags*="curso"][data-tags*="ia"] {
+.card[data-tags*="formacion"][data-tags*="produccion-audiovisual"] {
   box-shadow: -12px 8px 24px rgba(109,140,255,0.15), 12px 8px 24px rgba(199,125,255,0.15), 0 2px 8px rgba(0,0,0,0.1);
 }
-.card[data-tags*="curso"][data-tags*="ia"]:hover {
+.card[data-tags*="formacion"][data-tags*="produccion-audiovisual"]:hover {
   box-shadow: -20px 20px 48px rgba(109,140,255,0.35), 20px 20px 48px rgba(199,125,255,0.35);
 }
 
-.card[data-tags*="curso"][data-tags*="arquitectura"] {
+.card[data-tags*="formacion"][data-tags*="arquitectura"] {
   box-shadow: -12px 8px 24px rgba(109,140,255,0.15), 12px 8px 24px rgba(255,140,66,0.15), 0 2px 8px rgba(0,0,0,0.1);
 }
-.card[data-tags*="curso"][data-tags*="arquitectura"]:hover {
+.card[data-tags*="formacion"][data-tags*="arquitectura"]:hover {
   box-shadow: -20px 20px 48px rgba(109,140,255,0.35), 20px 20px 48px rgba(255,140,66,0.35);
 }
 
-.card[data-tags*="curso"][data-tags*="automovilismo"] {
+.card[data-tags*="formacion"][data-tags*="automocion"] {
   box-shadow: -12px 8px 24px rgba(109,140,255,0.15), 12px 8px 24px rgba(255,71,87,0.15), 0 2px 8px rgba(0,0,0,0.1);
 }
-.card[data-tags*="curso"][data-tags*="automovilismo"]:hover {
+.card[data-tags*="formacion"][data-tags*="automocion"]:hover {
   box-shadow: -20px 20px 48px rgba(109,140,255,0.35), 20px 20px 48px rgba(255,71,87,0.35);
 }
 
-/* EVENTO + especialidades */
-.card[data-tags*="evento"][data-tags*="realtime"] {
+/* DEMO + especialidades */
+.card[data-tags*="demo"][data-tags*="realtime"] {
   box-shadow: -12px 8px 24px rgba(242,199,56,0.12), 12px 8px 24px rgba(56,242,175,0.12), 0 2px 8px rgba(0,0,0,0.1);
 }
-.card[data-tags*="evento"][data-tags*="realtime"]:hover {
+.card[data-tags*="demo"][data-tags*="realtime"]:hover {
   box-shadow: -20px 20px 48px rgba(242,199,56,0.3), 20px 20px 48px rgba(56,242,175,0.3);
 }
 
-.card[data-tags*="evento"][data-tags*="ia"] {
+.card[data-tags*="demo"][data-tags*="produccion-audiovisual"] {
   box-shadow: -12px 8px 24px rgba(242,199,56,0.12), 12px 8px 24px rgba(199,125,255,0.15), 0 2px 8px rgba(0,0,0,0.1);
 }
-.card[data-tags*="evento"][data-tags*="ia"]:hover {
+.card[data-tags*="demo"][data-tags*="produccion-audiovisual"]:hover {
   box-shadow: -20px 20px 48px rgba(242,199,56,0.3), 20px 20px 48px rgba(199,125,255,0.35);
 }
 
-.card[data-tags*="evento"][data-tags*="arquitectura"] {
+.card[data-tags*="demo"][data-tags*="arquitectura"] {
   box-shadow: -12px 8px 24px rgba(242,199,56,0.12), 12px 8px 24px rgba(255,140,66,0.15), 0 2px 8px rgba(0,0,0,0.1);
 }
-.card[data-tags*="evento"][data-tags*="arquitectura"]:hover {
+.card[data-tags*="demo"][data-tags*="arquitectura"]:hover {
   box-shadow: -20px 20px 48px rgba(242,199,56,0.3), 20px 20px 48px rgba(255,140,66,0.35);
 }
 
-.card[data-tags*="evento"][data-tags*="automovilismo"] {
+.card[data-tags*="demo"][data-tags*="automocion"] {
   box-shadow: -12px 8px 24px rgba(242,199,56,0.12), 12px 8px 24px rgba(255,71,87,0.15), 0 2px 8px rgba(0,0,0,0.1);
 }
-.card[data-tags*="evento"][data-tags*="automovilismo"]:hover {
+.card[data-tags*="demo"][data-tags*="automocion"]:hover {
   box-shadow: -20px 20px 48px rgba(242,199,56,0.3), 20px 20px 48px rgba(255,71,87,0.35);
 }
 
-/* WORKSHOP + especialidades */
-.card[data-tags*="workshop"][data-tags*="realtime"] {
-  box-shadow: -12px 8px 24px rgba(255,107,157,0.15), 12px 8px 24px rgba(56,242,175,0.12), 0 2px 8px rgba(0,0,0,0.1);
-}
-.card[data-tags*="workshop"][data-tags*="realtime"]:hover {
-  box-shadow: -20px 20px 48px rgba(255,107,157,0.35), 20px 20px 48px rgba(56,242,175,0.3);
-}
-
-.card[data-tags*="workshop"][data-tags*="ia"] {
-  box-shadow: -12px 8px 24px rgba(255,107,157,0.15), 12px 8px 24px rgba(199,125,255,0.15), 0 2px 8px rgba(0,0,0,0.1);
-}
-.card[data-tags*="workshop"][data-tags*="ia"]:hover {
-  box-shadow: -20px 20px 48px rgba(255,107,157,0.35), 20px 20px 48px rgba(199,125,255,0.35);
-}
-
-.card[data-tags*="workshop"][data-tags*="arquitectura"] {
-  box-shadow: -12px 8px 24px rgba(255,107,157,0.15), 12px 8px 24px rgba(255,140,66,0.15), 0 2px 8px rgba(0,0,0,0.1);
-}
-.card[data-tags*="workshop"][data-tags*="arquitectura"]:hover {
-  box-shadow: -20px 20px 48px rgba(255,107,157,0.35), 20px 20px 48px rgba(255,140,66,0.35);
-}
-
-.card[data-tags*="workshop"][data-tags*="automovilismo"] {
-  box-shadow: -12px 8px 24px rgba(255,107,157,0.15), 12px 8px 24px rgba(255,71,87,0.15), 0 2px 8px rgba(0,0,0,0.1);
-}
-.card[data-tags*="workshop"][data-tags*="automovilismo"]:hover {
-  box-shadow: -20px 20px 48px rgba(255,107,157,0.35), 20px 20px 48px rgba(255,71,87,0.35);
-}
-
 /* Fallback para cards sin especialidad (solo tipo) */
-.card[data-tags*="curso"]:not([data-tags*="realtime"]):not([data-tags*="ia"]):not([data-tags*="arquitectura"]):not([data-tags*="automovilismo"]) {
+.card[data-tags*="formacion"]:not([data-tags*="realtime"]):not([data-tags*="produccion-audiovisual"]):not([data-tags*="arquitectura"]):not([data-tags*="automocion"]) {
   box-shadow: 0 8px 24px rgba(109,140,255,0.15), 0 2px 8px rgba(0,0,0,0.1);
 }
-.card[data-tags*="evento"]:not([data-tags*="realtime"]):not([data-tags*="ia"]):not([data-tags*="arquitectura"]):not([data-tags*="automovilismo"]) {
+.card[data-tags*="demo"]:not([data-tags*="realtime"]):not([data-tags*="produccion-audiovisual"]):not([data-tags*="arquitectura"]):not([data-tags*="automocion"]) {
   box-shadow: 0 8px 24px rgba(242,199,56,0.12), 0 2px 8px rgba(0,0,0,0.1);
-}
-.card[data-tags*="workshop"]:not([data-tags*="realtime"]):not([data-tags*="ia"]):not([data-tags*="arquitectura"]):not([data-tags*="automovilismo"]) {
-  box-shadow: 0 8px 24px rgba(255,107,157,0.15), 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .card-image {
@@ -512,27 +517,26 @@ header h1 span {
   height: 200px;
   background-size: cover;
   background-position: center;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 16px;
 }
 
-.card-image .tag {
-  position: absolute;
-  top: 16px;
-  margin: 0;
-  pointer-events: none;
-  transition: none;
-}
-
-.card-image .tag.tag-left {
-  left: 16px;
-}
-
-.card-image .tag.tag-right {
-  right: 16px;
-}
-
-.card-image .tag:hover {
-  transform: none;
-  box-shadow: none;
+/* Fechas en la parte superior de la card */
+.card-dates {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.7);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent-2);
+  border: 1px solid rgba(242,199,56,0.3);
 }
 
 /* Colores para tags de especialidad en las cards */
@@ -542,10 +546,10 @@ header h1 span {
   color: var(--color-realtime);
 }
 
-.tag-specialty-ia {
+.tag-specialty-produccion-audiovisual {
   background: rgba(199,125,255,0.2);
-  border-color: var(--color-ia);
-  color: var(--color-ia);
+  border-color: var(--color-produccion-audiovisual);
+  color: var(--color-produccion-audiovisual);
 }
 
 .tag-specialty-arquitectura {
@@ -554,10 +558,10 @@ header h1 span {
   color: var(--color-arquitectura);
 }
 
-.tag-specialty-automovilismo {
+.tag-specialty-automocion {
   background: rgba(255,71,87,0.2);
-  border-color: var(--color-automovilismo);
-  color: var(--color-automovilismo);
+  border-color: var(--color-automocion);
+  color: var(--color-automocion);
 }
 
 .card-content {
@@ -582,6 +586,230 @@ header h1 span {
   flex-grow: 1;
 }
 
+.card-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  border-top: 1px solid var(--glass-border);
+  padding-top: 12px;
+}
+
+.card-footer .tag {
+  font-size: 0.7rem;
+  padding: 6px 12px;
+  margin: 0;
+}
+
+.card-footer .tag-type {
+  background: rgba(109,140,255,0.15);
+  border-color: var(--color-formacion);
+  color: var(--color-formacion);
+}
+
+/* ===== BOTÓN INSCRIBIRSE Y FORMULARIO ===== */
+.btn-inscribirse {
+  width: 100%;
+  padding: 10px 20px;
+  margin-top: 12px;
+  border-radius: 10px;
+  background: rgba(109,140,255,0.15);
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s var(--transition-smooth);
+}
+
+.btn-inscribirse:hover {
+  background: rgba(109,140,255,0.25);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(109,140,255,0.2);
+}
+
+.btn-inscribirse:active {
+  transform: translateY(0);
+}
+
+.form-inscripcion {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  z-index: 2000;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s var(--transition-smooth);
+}
+
+.form-inscripcion.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.form-inscripcion-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  z-index: 1999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.form-inscripcion-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.inscription-form {
+  background: linear-gradient(180deg, rgba(21,25,34,0.98), rgba(11,13,16,0.98));
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 400px;
+  max-width: 90vw;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  position: relative;
+}
+
+.inscription-form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.inscription-form-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--accent-2);
+}
+
+.btn-form-close {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  color: var(--muted);
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.btn-form-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text);
+  transform: rotate(90deg);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-2);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.form-group input {
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--glass-border);
+  color: var(--text);
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition: all 0.3s var(--transition-smooth);
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: rgba(255,255,255,0.08);
+  box-shadow: 0 0 0 3px rgba(109,140,255,0.1);
+}
+
+.form-group input::placeholder {
+  color: var(--muted);
+  opacity: 0.5;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.btn-form-submit {
+  flex: 1;
+  padding: 12px 24px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  border: none;
+  color: white;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s var(--transition-smooth);
+}
+
+.btn-form-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(109,140,255,0.4);
+}
+
+.btn-form-cancel {
+  padding: 12px 24px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--glass-border);
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s var(--transition-smooth);
+}
+
+.btn-form-cancel:hover {
+  background: rgba(255,255,255,0.1);
+  color: var(--text);
+  transform: translateY(-2px);
+}
+
+/* Responsive para formulario popup */
+@media (max-width: 768px) {
+  .inscription-form {
+    min-width: auto;
+    width: 90vw;
+    padding: 24px;
+  }
+
+  .inscription-form-title {
+    font-size: 1rem;
+  }
+}
+
+/* Soporte para .date antiguo (por compatibilidad) */
 .date {
   display: flex;
   justify-content: space-between;
@@ -915,16 +1143,12 @@ header h1 span {
 }
 
 /* Colores por tipo de evento en calendario */
-.calendar-event.curso {
-  border-color: var(--color-curso);
+.calendar-event.formacion {
+  border-color: var(--color-formacion);
 }
 
-.calendar-event.evento {
-  border-color: var(--color-evento);
-}
-
-.calendar-event.workshop {
-  border-color: var(--color-workshop);
+.calendar-event.demo {
+  border-color: var(--color-demo);
 }
 
 .month-empty {
@@ -933,6 +1157,195 @@ header h1 span {
   color: var(--muted);
   font-size: 0.85rem;
   font-style: italic;
+}
+
+/* ===== HERO CARD DE UNREAL ENGINE ===== */
+.unreal-hero-card {
+  width: 100%;
+  margin: 0 0 64px 0;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s var(--transition-smooth);
+}
+
+.unreal-hero-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.unreal-hero-content {
+  position: relative;
+  min-height: 350px;
+  background: linear-gradient(135deg, rgba(109,140,255,0.1), rgba(242,199,56,0.05));
+  border-radius: 24px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  display: grid;
+  grid-template-columns: 30% 70%;
+  gap: 0;
+}
+
+.unreal-hero-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--color-realtime), var(--accent));
+  background-size: 200% 100%;
+  animation: shimmer 4s linear infinite;
+  z-index: 2;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.unreal-hero-image {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  min-height: 350px;
+}
+
+.unreal-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(109,140,255,0.3), rgba(0,0,0,0.6));
+  mix-blend-mode: multiply;
+}
+
+.unreal-hero-text {
+  padding: 32px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+  background: linear-gradient(135deg, rgba(11,13,16,0.95), rgba(21,25,34,0.98));
+  position: relative;
+  z-index: 1;
+}
+
+.unreal-hero-tag {
+  display: inline-block;
+  padding: 8px 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  width: fit-content;
+  box-shadow: 0 4px 12px rgba(109,140,255,0.4);
+}
+
+.unreal-hero-title {
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  background: linear-gradient(135deg, var(--text), var(--accent-2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.unreal-hero-description {
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  max-width: 95%;
+}
+
+.unreal-hero-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--glass-border);
+  flex-wrap: wrap;
+}
+
+.unreal-hero-powered {
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.unreal-hero-btn {
+  padding: 14px 32px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  border: none;
+  color: white;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s var(--transition-smooth);
+  box-shadow: 0 4px 16px rgba(109,140,255,0.3);
+}
+
+.unreal-hero-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(109,140,255,0.5);
+}
+
+.unreal-hero-btn:active {
+  transform: translateY(0);
+}
+
+/* Responsive para hero card */
+@media (max-width: 1024px) {
+  .unreal-hero-content {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .unreal-hero-image {
+    min-height: 300px;
+    order: -1;
+  }
+
+  .unreal-hero-text {
+    padding: 32px;
+  }
+
+  .unreal-hero-description {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .unreal-hero-text {
+    padding: 24px;
+    gap: 16px;
+  }
+
+  .unreal-hero-title {
+    font-size: 1.75rem;
+  }
+
+  .unreal-hero-description {
+    font-size: 0.95rem;
+  }
+
+  .unreal-hero-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .unreal-hero-btn {
+    width: 100%;
+    text-align: center;
+  }
 }
 
 /* ===== FOOTER ===== */
@@ -1012,5 +1425,13 @@ footer {
   .modal-info-grid {
     grid-template-columns: 1fr;
     gap: 16px;
+  }
+
+  .btn-calendar-float {
+    width: 56px;
+    height: 56px;
+    font-size: 1.75rem;
+    bottom: 20px;
+    right: 20px;
   }
 }

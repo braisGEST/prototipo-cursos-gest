@@ -3,26 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cursos & Eventos</title>
+  <title>Gestmusic Trainning</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header>
     <div class="header-content">
       <div class="header-bar">
-        <h1>gest-cursos <span style="font-size: 12px;">powered by unreal</span></h1>
+        <div class="logo-container">
+        <img src="data/logo_gets.png" alt="gest-cursos" class="logo-image">
+          <span class="powered-by">powered by unreal</span>
+        </img>
+
+        </div>
         <nav class="filter-nav">
-        
-     
-          <button class="tag tag-type" data-filter="curso">Curso</button>
-          <button class="tag tag-type" data-filter="evento">Evento</button>
-          <button class="tag tag-type" data-filter="workshop">Workshop</button>
-
-          <button class="tag tag-specialty" data-filter="realtime">Realtime</button>
-          <button class="tag tag-specialty" data-filter="ia">IA</button>
-          <button class="tag tag-specialty" data-filter="arquitectura">Arquitectura</button>
-          <button class="tag tag-specialty" data-filter="automovilismo">Automovilismo</button>
-
+          <button type="button" class="tag tag-all" data-filter="all">Todos</button>
+          <button type="button" class="tag tag-specialty" data-filter="realtime">Realtime</button>
+          <button type="button" class="tag tag-specialty" data-filter="produccion-audiovisual">Producción Audiovisual</button>
+          <button type="button" class="tag tag-specialty" data-filter="arquitectura">Arquitectura</button>
+          <button type="button" class="tag tag-specialty" data-filter="automocion">Automoción</button>
         </nav>
       </div>
     </div>
@@ -60,9 +59,7 @@
     <footer>
       <div style="display:flex; flex-direction:column; gap:12px; align-items:center;">
         <div style="display:flex; gap:16px; flex-wrap:wrap; justify-content:center;">
-          <a href="https://www.gestmusictraining.es/" target="_blank" style="color:var(--accent); text-decoration:none;">Contacto · Gest Music Training</a>
           <a href="https://braisalvarez.github.io/portfolio/" target="_blank" style="color:var(--accent-2); text-decoration:none;">Creado por Brais :D</a>
-          <a href="https://layersofreality.com/" target="_blank" style="color:var(--accent); text-decoration:none;">En colaboración con Layers of Reality</a>
         </div>
         <span style="color:var(--muted); font-size:0.75rem;">© 2026 · gest-cursos</span>
       </div>
@@ -116,6 +113,11 @@
       </div>
     </div>
   </div>
+
+  <!-- Botón flotante del calendario -->
+  <button type="button" class="btn-calendar-float" onclick="document.querySelector('.calendar-section').scrollIntoView({behavior: 'smooth'})" title="Ir al calendario">
+    📅
+  </button>
 
   <script src="script.js"></script>
 </body>
