@@ -10,14 +10,19 @@
   <header>
     <div class="header-content">
       <div class="header-bar">
-        <h1>gest-cursos <span>powered by unreal</span></h1>
-        <nav style="display:flex; gap:12px; flex-wrap:wrap;">
-          <button class="tag active" data-filter="all">Todos</button>
-          <button class="tag" data-filter="curso">Curso</button>
-          <button class="tag" data-filter="evento">Evento</button>
-          <button class="tag" data-filter="workshop">Workshop</button>
-          <button class="tag" data-filter="realtime">Realtime</button>
-          <button class="tag" data-filter="ia">IA</button>
+        <h1>gest-cursos <span style="font-size: 12px;">powered by unreal</span></h1>
+        <nav class="filter-nav">
+        
+     
+          <button class="tag tag-type" data-filter="curso">Curso</button>
+          <button class="tag tag-type" data-filter="evento">Evento</button>
+          <button class="tag tag-type" data-filter="workshop">Workshop</button>
+
+          <button class="tag tag-specialty" data-filter="realtime">Realtime</button>
+          <button class="tag tag-specialty" data-filter="ia">IA</button>
+          <button class="tag tag-specialty" data-filter="arquitectura">Arquitectura</button>
+          <button class="tag tag-specialty" data-filter="automovilismo">Automovilismo</button>
+
         </nav>
       </div>
     </div>
@@ -42,6 +47,14 @@
     <!-- Grid de Artículos (se renderizará dinámicamente desde JSON) -->
     <section class="grid">
       <!-- Los artículos se generarán dinámicamente desde el JSON -->
+    </section>
+
+    <!-- Calendario de Eventos -->
+    <section class="calendar-section">
+      <h2 class="calendar-title">Calendario de Eventos 2026</h2>
+      <div id="event-calendar" class="event-calendar">
+        <!-- El calendario se generará dinámicamente -->
+      </div>
     </section>
 
     <footer>

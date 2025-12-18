@@ -173,14 +173,14 @@ const ARTICLES_DATA = [
   },
   {
     "id": 10,
-    "titulo": "Motion Capture para Realtime",
-    "descripcion": "Captura de movimiento y su integración en pipelines de producción en tiempo real.",
-    "descripcionExtendida": "Workshop práctico sobre motion capture aplicado a producción realtime. Desde la captura con sistemas ópticos e inerciales, hasta la limpieza de datos, retargeting, y uso en directo en Unreal Engine. Incluye sesiones prácticas con equipamiento profesional de MoCap.",
-    "tags": ["workshop"],
+    "titulo": "Visualización Arquitectónica · Unreal Engine",
+    "descripcion": "Renderizado fotorealista y recorridos virtuales para proyectos de arquitectura.",
+    "descripcionExtendida": "Workshop especializado en visualización arquitectónica con Unreal Engine. Aprende a crear renders fotorealistas, configurar iluminación natural y artificial, materiales PBR para arquitectura, y recorridos virtuales interactivos. Ideal para arquitectos y visualizadores que quieren adoptar realtime.",
+    "tags": ["workshop", "arquitectura"],
     "tipoEtiqueta": "Workshop",
     "fechaInicio": "25 Jul 2026",
     "fechaFin": "27 Jul 2026",
-    "linkImagen": "https://images.unsplash.com/photo-1551033406-611cf9a28f67?auto=format&fit=crop&w=1200&q=80",
+    "linkImagen": "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80",
     "featured": false,
     "precio": "449€",
     "duracion": "3 días (24 horas)",
@@ -190,14 +190,14 @@ const ARTICLES_DATA = [
   },
   {
     "id": 11,
-    "titulo": "Lighting Artist Masterclass",
-    "descripcion": "Curso especializado en iluminación para producción virtual y entornos 3D realistas.",
-    "descripcionExtendida": "Masterclass de 2 meses para artistas de iluminación que quieren especializarse en producción virtual y entornos realtime. Teoría del color, luz cinematográfica, Lumen vs. baked lighting, iluminación dinámica, HDRI, light baking avanzado, y workflows de lighting en producciones profesionales.",
-    "tags": ["curso"],
+    "titulo": "Simulación Automovilística · Configuración VR",
+    "descripcion": "Desarrollo de experiencias de conducción realista con VR y física avanzada.",
+    "descripcionExtendida": "Curso especializado en simulación automovilística con Unreal Engine. Configuración de física vehicular realista, integración con hardware de simulación (volantes, pedales), desarrollo de circuitos, VR para inmersión total, y optimización de rendimiento para experiencias fluidas. Ideal para desarrolladores de simuladores.",
+    "tags": ["curso", "automovilismo"],
     "tipoEtiqueta": "Curso",
     "fechaInicio": "1 Sep 2026",
     "fechaFin": "30 Oct 2026",
-    "linkImagen": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80",
+    "linkImagen": "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=1200&q=80",
     "featured": false,
     "precio": "649€",
     "duracion": "8 semanas (48 horas)",
@@ -258,18 +258,18 @@ const ARTICLES_DATA = [
   },
   {
     "id": 15,
-    "titulo": "Python para Pipeline TD",
-    "descripcion": "Automatización y herramientas custom para pipelines de producción 3D.",
-    "descripcionExtendida": "Curso intensivo de Python orientado a Technical Directors. Automatización de tareas en DCCs (Maya, Blender, Houdini), desarrollo de herramientas custom, gestión de assets, integración con APIs de gestión de proyectos, y creación de pipelines escalables. Incluye módulos de PyQt para interfaces de usuario.",
-    "tags": ["curso"],
-    "tipoEtiqueta": "Curso",
+    "titulo": "Diseño Paramétrico para Arquitectura",
+    "descripcion": "Modelado generativo y procedural para proyectos arquitectónicos complejos.",
+    "descripcionExtendida": "Curso avanzado de diseño paramétrico aplicado a arquitectura. Uso de Grasshopper, Houdini y Unreal Engine para crear sistemas procedurales, optimización de geometría, generación de fachadas, y visualización en tiempo real. Aprende workflows profesionales de estudios de arquitectura innovadores.",
+    "tags": ["evento", "arquitectura"],
+    "tipoEtiqueta": "Evento",
     "fechaInicio": "1 Mayo 2026",
-    "fechaFin": "15 Jun 2026",
-    "linkImagen": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80",
+    "fechaFin": "1 Mayo 2026",
+    "linkImagen": "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1200&q=80",
     "featured": false,
-    "precio": "699€",
-    "duracion": "7 semanas (56 horas)",
-    "horario": "Lun-Mié-Vie 18:00-22:00",
+    "precio": "199€",
+    "duracion": "1 día (8 horas)",
+    "horario": "Sáb 09:00-18:00",
     "instructor": "Jorge López",
     "orden": 15
   },
@@ -420,9 +420,15 @@ function createCardFromJSON(article) {
     return div.innerHTML;
   };
 
+  // Encontrar la especialidad del artículo
+  const specialties = ['realtime', 'ia', 'arquitectura', 'automovilismo'];
+  const specialty = article.tags.find(tag => specialties.includes(tag));
+  const specialtyLabel = specialty ? specialty.charAt(0).toUpperCase() + specialty.slice(1) : '';
+
   articleEl.innerHTML = `
     <div class="card-image" style="background-image:url('${escapeHtml(article.linkImagen)}');">
-      <span class="tag">${escapeHtml(article.tipoEtiqueta)}</span>
+      <span class="tag tag-left">${escapeHtml(article.tipoEtiqueta)}</span>
+      ${specialty ? `<span class="tag tag-right tag-specialty-${specialty}">${escapeHtml(specialtyLabel)}</span>` : ''}
     </div>
     <div class="card-content">
       <h3>${escapeHtml(article.titulo)}</h3>
@@ -847,6 +853,139 @@ function initializeFilterSystem() {
 }
 
 // ============================================================================
+// CALENDARIO DE EVENTOS
+// ============================================================================
+
+/**
+ * Renderiza el calendario de eventos por mes
+ */
+function renderEventCalendar(articles) {
+  const calendarContainer = document.getElementById('event-calendar');
+
+  if (!calendarContainer) {
+    console.warn('Calendar container not found');
+    return;
+  }
+
+  // Meses del año
+  const months = [
+    'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+    'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+  ];
+
+  // Agrupar artículos por mes
+  const eventsByMonth = {};
+
+  articles.forEach(article => {
+    if (!article.fechaInicio) return;
+
+    // Parsear la fecha (formato: "1 Feb 2026" o "12 Mar 2026")
+    const dateParts = article.fechaInicio.split(' ');
+    const monthName = dateParts[1];
+
+    // Convertir nombre de mes a número
+    const monthMap = {
+      'Ene': 0, 'Feb': 1, 'Mar': 2, 'Abr': 3, 'May': 4, 'Jun': 5,
+      'Jul': 6, 'Ago': 7, 'Sep': 8, 'Oct': 9, 'Nov': 10, 'Dic': 11,
+      'Enero': 0, 'Febrero': 1, 'Marzo': 2, 'Abril': 3, 'Mayo': 4, 'Junio': 5,
+      'Julio': 6, 'Agosto': 7, 'Septiembre': 8, 'Octubre': 9, 'Noviembre': 10, 'Diciembre': 11
+    };
+
+    const monthIndex = monthMap[monthName];
+
+    if (monthIndex !== undefined) {
+      if (!eventsByMonth[monthIndex]) {
+        eventsByMonth[monthIndex] = [];
+      }
+
+      eventsByMonth[monthIndex].push({
+        ...article,
+        day: parseInt(dateParts[0])
+      });
+    }
+  });
+
+  // Limpiar calendario
+  calendarContainer.innerHTML = '';
+
+  // Renderizar cada mes que tenga eventos
+  months.forEach((monthName, index) => {
+    const monthEvents = eventsByMonth[index];
+
+    if (!monthEvents || monthEvents.length === 0) return;
+
+    // Ordenar eventos por día
+    monthEvents.sort((a, b) => a.day - b.day);
+
+    const monthCard = document.createElement('div');
+    monthCard.className = 'calendar-month';
+
+    const monthHeader = document.createElement('div');
+    monthHeader.className = 'month-header';
+    monthHeader.textContent = monthName;
+
+    const eventsContainer = document.createElement('div');
+    eventsContainer.className = 'month-events';
+
+    monthEvents.forEach(event => {
+      const eventEl = document.createElement('div');
+      const eventType = event.tags.find(tag => ['curso', 'evento', 'workshop'].includes(tag)) || 'evento';
+      eventEl.className = `calendar-event ${eventType}`;
+      eventEl.dataset.articleId = event.id;
+
+      eventEl.innerHTML = `
+        <div class="event-date">${event.fechaInicio}${event.fechaFin && event.fechaFin !== event.fechaInicio ? ' - ' + event.fechaFin : ''}</div>
+        <div class="event-title">${event.titulo}</div>
+        <div class="event-type">${event.tipoEtiqueta}</div>
+      `;
+
+      // Click para abrir modal
+      eventEl.addEventListener('click', () => {
+        const modal = document.getElementById('article-modal');
+        if (modal) {
+          const article = articlesData.find(a => a.id === event.id);
+          if (article) {
+            // Usar la misma función que abre el modal desde las cards
+            const modalImage = modal.querySelector('.modal-image');
+            const modalTag = modal.querySelector('.modal-tag');
+            const modalTitle = modal.querySelector('.modal-body h2');
+            const modalDescription = modal.querySelector('.modal-description');
+            const modalPrecio = modal.querySelector('#modal-precio');
+            const modalDuracion = modal.querySelector('#modal-duracion');
+            const modalHorario = modal.querySelector('#modal-horario');
+            const modalInstructor = modal.querySelector('#modal-instructor');
+            const modalFechaInicio = modal.querySelector('#modal-fecha-inicio');
+            const modalFechaFin = modal.querySelector('#modal-fecha-fin');
+
+            if (modalImage) modalImage.style.backgroundImage = `url('${article.linkImagen}')`;
+            if (modalTag) modalTag.textContent = article.tipoEtiqueta;
+            if (modalTitle) modalTitle.textContent = article.titulo;
+            if (modalDescription) modalDescription.textContent = article.descripcionExtendida || article.descripcion;
+            if (modalPrecio) modalPrecio.textContent = article.precio || 'Consultar';
+            if (modalDuracion) modalDuracion.textContent = article.duracion || 'Por definir';
+            if (modalHorario) modalHorario.textContent = article.horario || 'Flexible';
+            if (modalInstructor) modalInstructor.textContent = article.instructor || 'Por confirmar';
+            if (modalFechaInicio) modalFechaInicio.textContent = article.fechaInicio ? `Inicio: ${article.fechaInicio}` : '';
+            if (modalFechaFin) modalFechaFin.textContent = article.fechaFin ? `Fin: ${article.fechaFin}` : '';
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+          }
+        }
+      });
+
+      eventsContainer.appendChild(eventEl);
+    });
+
+    monthCard.appendChild(monthHeader);
+    monthCard.appendChild(eventsContainer);
+    calendarContainer.appendChild(monthCard);
+  });
+
+  console.log(`📅 Calendar rendered with events from ${Object.keys(eventsByMonth).length} months`);
+}
+
+// ============================================================================
 // INICIALIZACIÓN PRINCIPAL
 // ============================================================================
 
@@ -869,6 +1008,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Renderizar carrusel y artículos
     renderCarouselFromJSON(articles);
     renderArticlesFromJSON(articles);
+    renderEventCalendar(articles);
 
     // Pequeña espera para que el DOM se actualice
     setTimeout(() => {
