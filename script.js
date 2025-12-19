@@ -98,7 +98,8 @@ const ARTICLES_DATA = [
     "duracion": "4 meses (160 horas)",
     "horario": "Lun-Mié 18:00-22:00",
     "instructor": "Carlos Martínez & Laura Gómez",
-    "orden": 1
+    "orden": 1,
+    "certification": "epic"
   },
   {
     "id": 2,
@@ -115,7 +116,8 @@ const ARTICLES_DATA = [
     "duracion": "7 semanas (56 horas)",
     "horario": "Mar-Jue 19:00-23:00",
     "instructor": "Laura Gómez",
-    "orden": 2
+    "orden": 2,
+    "certification": "unreal"
   },
   {
     "id": 3,
@@ -217,7 +219,8 @@ const ARTICLES_DATA = [
     "duracion": "6 semanas (48 horas)",
     "horario": "Lun-Mié 19:00-23:00",
     "instructor": "Pedro Jiménez",
-    "orden": 8
+    "orden": 8,
+    "certification": "epic"
   },
   {
     "id": 9,
@@ -268,7 +271,8 @@ const ARTICLES_DATA = [
     "duracion": "8 semanas (64 horas)",
     "horario": "Mar-Jue 18:00-22:00",
     "instructor": "Elena Vargas & Racing Team",
-    "orden": 11
+    "orden": 11,
+    "certification": "unreal"
   },
   {
     "id": 12,
@@ -319,7 +323,8 @@ const ARTICLES_DATA = [
     "duracion": "5 semanas (50 horas)",
     "horario": "Lun-Vie 19:00-23:00",
     "instructor": "Patricia Gil & Mocap Team",
-    "orden": 14
+    "orden": 14,
+    "certification": "epic"
   },
   {
     "id": 15,
@@ -404,7 +409,8 @@ const ARTICLES_DATA = [
     "duracion": "4 semanas (48 horas)",
     "horario": "Lun-Jue 19:00-22:00 + Sáb 10:00-16:00",
     "instructor": "Laura Gómez & Lighting Team",
-    "orden": 19
+    "orden": 19,
+    "certification": "unreal"
   },
   {
     "id": 20,
@@ -502,8 +508,15 @@ function createCardFromJSON(article) {
     `<span class="tag tag-specialty tag-specialty-${specialty}">${escapeHtml(specialtyLabels[specialty])}</span>`
   ).join('');
 
+  // Certificación badge HTML si existe
+  const certificationBadgeHTML = article.certification ?
+    `<div class="certification-badge certification-${article.certification}">
+      <img src="data/${article.certification === 'epic' ? 'certified epic.png' : 'certified unreal.png'}" alt="Certified ${article.certification === 'epic' ? 'Epic' : 'Unreal'}">
+    </div>` : '';
+
   articleEl.innerHTML = `
     <div class="card-image" style="background-image:url('${escapeHtml(article.linkImagen)}');">
+      ${certificationBadgeHTML}
       <div class="card-dates">
         ${article.fechaInicio ? `<span>📅 ${escapeHtml(article.fechaInicio)}</span>` : ''}
         ${article.fechaFin && article.fechaFin !== article.fechaInicio ? `<span>→ ${escapeHtml(article.fechaFin)}</span>` : ''}
@@ -711,12 +724,20 @@ function createCarouselSlide(article, isActive) {
     return div.innerHTML;
   };
 
+  // Certificación badge HTML para carrusel si existe
+  const certificationBadgeHTML = article.certification ?
+    `<div class="certification-badge certification-${article.certification} featured-certification">
+      <img src="data/${article.certification === 'epic' ? 'certified epic.png' : 'certified unreal.png'}" alt="Certified ${article.certification === 'epic' ? 'Epic' : 'Unreal'}">
+    </div>` : '';
+
   slide.innerHTML = `
     <article class="featured-card" data-article-id="${article.id}">
-      <div class="featured-image" style="background-image:url('${escapeHtml(article.linkImagen)}')"></div>
+      <div class="featured-image" style="background-image:url('${escapeHtml(article.linkImagen)}')">
+        ${certificationBadgeHTML}
+      </div>
       <div class="featured-content">
         <span class="featured-tag">${escapeHtml(article.tipoEtiqueta)}</span>
-        <h2>${escapeHtml(article.titulo)}</h2>
+        <h2>${escapeHtml(article.titulo)} </h2>
         <p>${escapeHtml(article.descripcion)}</p>
         <div class="featured-dates">
           ${article.fechaInicio ? `<span>Inicio: ${escapeHtml(article.fechaInicio)}</span>` : ''}
